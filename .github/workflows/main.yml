@@ -49,8 +49,8 @@ jobs:
          zip -r golf-pickem-data-lambda.zip .
          
          #for installing chrome
-         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-         sudo dpkg -i google-chrome-stable_current_amd64.deb
+         #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+         #sudo dpkg -i google-chrome-stable_current_amd64.deb
          
          #ensuring current working directory is accessible by the function--this might not be doing anything
          export PATH=$PATH:$(pwd)
