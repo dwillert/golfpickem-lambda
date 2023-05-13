@@ -46,7 +46,9 @@ jobs:
          #install all dependencies as defined by requirements.txt in the current directory
          pip install pipenv
          pipenv install
-         zip -r golf-pickem-data-lambda.zip ./golfpickem-lambda
+         echo $(pwd)
+         zip -r golf-pickem-data-lambda.zip .
+         ls
          
          #for installing chrome
          #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
