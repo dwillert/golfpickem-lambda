@@ -45,7 +45,7 @@ jobs:
          python3 -m pip install --upgrade pip
          #install all dependencies as defined by requirements.txt in the current directory
          pip install pipenv
-         pipenv run install
+         pipenv install
          zip -r golf-pickem-data-lambda.zip .
          
          #for installing chrome
