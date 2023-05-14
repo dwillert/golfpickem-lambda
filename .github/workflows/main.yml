@@ -45,7 +45,8 @@ jobs:
          python3 -m pip install --upgrade pip
          #install all dependencies as defined by requirements.txt in the current directory
          pip install pipenv
-         pipenv install
+         pipenv lock --requirements > requirements.txt
+         pip3 install --target=python -r requirements.txt
          zip -r golf-pickem-data-lambda.zip .
          aws lambda publish-layer-version --layer-name golf-pickem-data-layer \
           --description "Lambda Layer for Golf Pickem Lambda" \
@@ -55,6 +56,7 @@ jobs:
          
          #ensuring current working directory is accessible by the function--this might not be doing anything
          export PATH=$PATH:$(pwd)
+         rm -rf python
     
     #Deploy main.py to AWS
     - name: AWS Lambda Deploy
