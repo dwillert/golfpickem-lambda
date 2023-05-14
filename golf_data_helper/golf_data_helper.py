@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import ClientError
 import requests
 import json
 import logging
@@ -7,13 +8,24 @@ from os import environ
 
 class GolfData:
     def __init__(self):
-        self.api_key = environ["API_KEY"]
+        self.api_key = self._retrieve_api_key()
         self.tournament_id = environ["tournament_id"]
         self.leaderboard_data = {}
         self.tournament_data = {}
         self.s3_client = boto3.client("s3")
         self.logger = logging.getLogger("Golf Data Logger")
-        
+    
+    def _retrieve_api_key(self):
+        secrets_client = boto3.client("secretsmanager")
+        try:
+            secret_res = secrets_client.get_secret_value(
+                SecretId="golfpickem/api_key"
+            )
+        except Exception as e:
+            raise e
+        secret = secret_res['SecretString']
+        return secret
+    
     def _load_to_s3(self):
         try:
             response = self.s3_client.upload_file(Filename="/tmp/golf_tournament_data.json", Bucket="willert-bucket", Key="Projects/GolfPickem/golf_tournament_data.json")
@@ -40,6 +52,7 @@ class GolfData:
     
     def runner(self):
         url = f"https://golf-leaderboard-data.p.rapidapi.com/leaderboard/{self.tournament_id}"
+
 
         headers = {
             "X-RapidAPI-Key": self.api_key,
