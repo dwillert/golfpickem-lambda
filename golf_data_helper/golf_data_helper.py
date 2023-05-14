@@ -21,6 +21,7 @@ class GolfData:
             secret_res = secrets_client.get_secret_value(
                 SecretId="golfpickem/api_key"
             )
+            print("API call success")
         except Exception as e:
             print(e)
             raise e
