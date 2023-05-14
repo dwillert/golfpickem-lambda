@@ -22,8 +22,9 @@ class GolfData:
                 SecretId="golfpickem/api_key"
             )
         except Exception as e:
+            self.logger.error(e)
             raise e
-        secret = secret_res['SecretString']
+        secret = str(secret_res['SecretString'])
         return secret
     
     def _load_to_s3(self):
@@ -51,6 +52,7 @@ class GolfData:
             json.dump(self.golf_data, f)
     
     def runner(self):
+        self.logger.info("Starting Data Pull")
         url = f"https://golf-leaderboard-data.p.rapidapi.com/leaderboard/{self.tournament_id}"
 
 
@@ -63,6 +65,7 @@ class GolfData:
             self.logger.info(f"API RESPONSE: {response.status_code}")
             self.golf_data = response.json()
         except Exception as e:
+            self.logger.error(e)
             raise Exception from e
         self._create_json_file()
         try:
@@ -70,6 +73,7 @@ class GolfData:
             self.logger.info(f"S3 Client RESPONSE: {s3_response}")
             return s3_response
         except Exception as e:
+            self.logger.error(e)
             raise Exception from e 
     
 def lambda_handler(event, context):
