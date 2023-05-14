@@ -69,7 +69,7 @@ jobs:
         memory_size: 128
         timeout: 10
         handler: golf_data_helper.golf_data_helper.lambda_handler
-        role: arn:aws:iam::518463288977:role/Willert
+        role: arn:aws:iam::518463288977:role/service-role/golf-pickem-data-lambda-role
         runtime: python3.9
         #contains all the files in my github repository
         zip_file: golf-pickem-data-lambda.zip
