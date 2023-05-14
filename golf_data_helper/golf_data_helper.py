@@ -22,7 +22,7 @@ class GolfData:
                 SecretId="golfpickem/api_key"
             )
         except Exception as e:
-            self.logger.error(e)
+            print(e)
             raise e
         secret = str(secret_res['SecretString'])
         return secret

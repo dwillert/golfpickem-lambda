@@ -48,11 +48,11 @@ jobs:
          pipenv requirements --dev  > requirements.txt
          pip install --target=python -r requirements.txt
          zip -r golf-pickem-data-lambda.zip .
-         aws lambda publish-layer-version --layer-name golf-pickem-data-layer \
-          --description "Lambda Layer for Golf Pickem Lambda" \
-          --zip-file fileb://golf-pickem-data-lambda.zip \
-          --compatible-runtimes python3.9 python3.10 \
-          --compatible-architectures "arm64" "x86_64"
+        #  aws lambda publish-layer-version --layer-name golf-pickem-data-layer \
+        #   --description "Lambda Layer for Golf Pickem Lambda" \
+        #   --zip-file fileb://golf-pickem-data-lambda.zip \
+        #   --compatible-runtimes python3.9 python3.10 \
+        #   --compatible-architectures "arm64" "x86_64"
          
          #ensuring current working directory is accessible by the function--this might not be doing anything
          export PATH=$PATH:$(pwd)
