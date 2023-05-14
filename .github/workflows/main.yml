@@ -46,13 +46,12 @@ jobs:
          #install all dependencies as defined by requirements.txt in the current directory
          pip install pipenv
          pipenv install
-         echo $(pwd)
          zip -r golf-pickem-data-lambda.zip .
-         ls
-         
-         #for installing chrome
-         #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-         #sudo dpkg -i google-chrome-stable_current_amd64.deb
+         aws lambda publish-layer-version --layer-name golf-pickem-data-layer \
+          --description "Lambda Layer for Golf Pickem Lambda" \
+          --zip-file golf-pickem-data-lambda.zip \
+          --compatible-runtimes python3.9 python3.10 \
+          --compatible-architectures "arm64" "x86_64"
          
          #ensuring current working directory is accessible by the function--this might not be doing anything
          export PATH=$PATH:$(pwd)
