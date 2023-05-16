@@ -64,7 +64,8 @@ class GolfData:
             json.dump(self.golf_data, f)
     
     def runner(self):
-        self.logger.info("Starting Data Pull")
+        print("Starting Data Pull")
+        # self.logger.info("Starting Data Pull")
         url = f"https://golf-leaderboard-data.p.rapidapi.com/leaderboard/{self.tournament_id}"
 
 
@@ -74,7 +75,8 @@ class GolfData:
         }
         try:
             response = requests.request("GET", url, headers=headers)
-            self.logger.info(f"API RESPONSE: {response.status_code}")
+            print(f"API RESPONSE: {response.status_code}")
+            # self.logger.info(f"API RESPONSE: {response.status_code}")
             self.golf_data = response.json()
         except HTTPError as httpe:
             print(f"HTTP ERROR: {httpe.args[0]} - Full Log: {httpe}")
@@ -86,10 +88,11 @@ class GolfData:
         self._create_json_file()
         try:
             s3_response = self._load_to_s3()
-            self.logger.info(f"S3 Client RESPONSE: {s3_response}")
+            print(f"S3 Client RESPONSE: {s3_response}")
+            # self.logger.info(f"S3 Client RESPONSE: {s3_response}")
             return s3_response
         except Exception as e:
-            self.logger.error(e)
+            print(e)
             raise Exception from e 
     
 def lambda_handler(event, context):
