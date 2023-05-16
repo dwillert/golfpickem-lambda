@@ -4,6 +4,7 @@ import requests
 from requests.exceptions import RequestException, HTTPError, ConnectionError
 import json
 import logging
+import ast
 
 from os import environ
 
@@ -18,12 +19,11 @@ class GolfData:
     
     def _retrieve_api_key(self):
         secret_name = "golfpickem/api_key"
-        secrets_client = boto3.client(service_name="secretsmanager", region_name="us-east-1")
+        secrets_client = boto3.client("secretsmanager", region_name="us-east-1")
         try:
             secret_res = secrets_client.get_secret_value(
                 SecretId=secret_name,
             )
-            print("API call success")
         except ClientError as e:
             if e.response['Error']['Code'] == 'ResourceNotFoundException':
                 print("The requested secret " + secret_name + " was not found")
@@ -36,7 +36,8 @@ class GolfData:
             elif e.response['Error']['Code'] == 'InternalServiceError':
                 print("An error occurred on service side:", e)
         else:
-            secret = str(secret_res['SecretString'])
+            secret_dict = ast.literal_eval(secret_res['SecretString'])
+            secret = secret_dict['API_KEY']
             return secret
     
     def _load_to_s3(self):
@@ -100,6 +101,6 @@ def lambda_handler(event, context):
     data_client.runner()
     return "Complete"
 
-# if __name__ == "__main__":
-#     data_client = GolfData()
-#     data_client.runner()
+if __name__ == "__main__":
+    data_client = GolfData()
+    data_client.runner()
