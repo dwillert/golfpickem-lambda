@@ -1,6 +1,7 @@
 import boto3
 from botocore.exceptions import ClientError
 import requests
+from requests.exceptions import RequestException, HTTPError, ConnectionError
 import json
 import logging
 
@@ -9,24 +10,34 @@ from os import environ
 class GolfData:
     def __init__(self):
         self.api_key = self._retrieve_api_key()
-        self.tournament_id = environ["tournament_id"]
+        self.tournament_id = str(environ["tournament_id"])
         self.leaderboard_data = {}
         self.tournament_data = {}
         self.s3_client = boto3.client("s3")
         self.logger = logging.getLogger("Golf Data Logger")
     
     def _retrieve_api_key(self):
-        secrets_client = boto3.client("secretsmanager")
+        secret_name = "golfpickem/api_key"
+        secrets_client = boto3.client(service_name="secretsmanager", region_name="us-east-1")
         try:
             secret_res = secrets_client.get_secret_value(
-                SecretId="golfpickem/api_key"
+                SecretId=secret_name,
             )
             print("API call success")
-        except Exception as e:
-            print(e)
-            raise e
-        secret = str(secret_res['SecretString'])
-        return secret
+        except ClientError as e:
+            if e.response['Error']['Code'] == 'ResourceNotFoundException':
+                print("The requested secret " + secret_name + " was not found")
+            elif e.response['Error']['Code'] == 'InvalidRequestException':
+                print("The request was invalid due to:", e)
+            elif e.response['Error']['Code'] == 'InvalidParameterException':
+                print("The request had invalid params:", e)
+            elif e.response['Error']['Code'] == 'DecryptionFailure':
+                print("The requested secret can't be decrypted using the provided KMS key:", e)
+            elif e.response['Error']['Code'] == 'InternalServiceError':
+                print("An error occurred on service side:", e)
+        else:
+            secret = str(secret_res['SecretString'])
+            return secret
     
     def _load_to_s3(self):
         try:
@@ -65,9 +76,13 @@ class GolfData:
             response = requests.request("GET", url, headers=headers)
             self.logger.info(f"API RESPONSE: {response.status_code}")
             self.golf_data = response.json()
-        except Exception as e:
-            self.logger.error(e)
-            raise Exception from e
+        except HTTPError as httpe:
+            print(f"HTTP ERROR: {httpe.args[0]} - Full Log: {httpe}")
+        except ConnectionError as conne:
+            print(f"Connection Error: {conne}")
+        except RequestException as reqe:
+            print(f"Request Exception: {reqe}")
+            raise Exception from reqe
         self._create_json_file()
         try:
             s3_response = self._load_to_s3()
