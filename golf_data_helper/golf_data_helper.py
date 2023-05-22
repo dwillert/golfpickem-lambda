@@ -42,7 +42,7 @@ class GolfData:
     
     def _load_to_s3(self):
         try:
-            response = self.s3_client.upload_file(Filename="/tmp/golf_tournament_data.json", Bucket="willert-bucket", Key="Projects/GolfPickem/golf_tournament_data.json")
+            response = self.s3_client.upload_file(Filename="/tmp/golf_tournament_data.json", Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
             print(response)
             self.logger.info(response)
             return response 
@@ -53,7 +53,7 @@ class GolfData:
         
     def _download_file(self):
         try:
-            response = self.s3_client.get_object(Bucket="willert-bucket", Key="Projects/GolfPickem/golf_tournament_data.json")
+            response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
         except Exception as e:
             print(e)
             self.logger.error(e)
