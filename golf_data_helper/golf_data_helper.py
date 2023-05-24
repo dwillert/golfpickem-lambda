@@ -10,14 +10,14 @@ from os import environ
 
 class GolfData:
     def __init__(self):
-        self.api_key = self._retrieve_api_key()
+        self.api_key = self.retrieve_api_key()
         self.tournament_id = str(environ["tournament_id"])
         self.leaderboard_data = {}
         self.tournament_data = {}
         self.s3_client = boto3.client("s3")
         self.logger = logging.getLogger("Golf Data Logger")
     
-    def _retrieve_api_key(self):
+    def retrieve_api_key(self):
         secret_name = "golfpickem/api_key"
         secrets_client = boto3.client("secretsmanager", region_name="us-east-1")
         try:
@@ -40,7 +40,7 @@ class GolfData:
             secret = secret_dict['API_KEY']
             return secret
     
-    def _load_to_s3(self):
+    def load_to_s3(self):
         try:
             response = self.s3_client.upload_file(Filename="/tmp/golf_tournament_data.json", Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
             print(response)
@@ -51,17 +51,17 @@ class GolfData:
             self.logger.error(e)
             raise Exception from e
         
-    def _download_file(self):
-        try:
-            response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
-        except Exception as e:
-            print(e)
-            self.logger.error(e)
-            raise Exception from e
-        return response
+    # def download_file(self):
+    #     try:
+    #         response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
+    #     except Exception as e:
+    #         print(e)
+    #         self.logger.error(e)
+    #         raise Exception from e
+    #     return response
 
-    def _create_json_file(self):
-        with open(f"/tmp/golf_tournament_data.json", "w+") as f:
+    def create_json_file(self):
+        with open("/tmp/golf_tournament_data.json", "w+") as f:
             json.dump(self.golf_data, f)
     
     def runner(self):
@@ -86,9 +86,9 @@ class GolfData:
         except RequestException as reqe:
             print(f"Request Exception: {reqe}")
             raise Exception from reqe
-        self._create_json_file()
+        self.create_json_file()
         try:
-            s3_response = self._load_to_s3()
+            s3_response = self.load_to_s3()
             print(f"S3 Client RESPONSE: {s3_response}")
             # self.logger.info(f"S3 Client RESPONSE: {s3_response}")
             return s3_response
@@ -101,6 +101,6 @@ def lambda_handler(event, context):
     data_client.runner()
     return "Complete"
 
-if __name__ == "__main__":
-    data_client = GolfData()
-    data_client.runner()
+# if __name__ == "__main__":
+#     data_client = GolfData()
+#     data_client.runner()

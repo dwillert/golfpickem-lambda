@@ -3,6 +3,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+unit-test = "pytest -v --cov=golf_data_helper/ tests/ --cov-report=term-missing"
+
 [packages]
 pytest = "*"
 
