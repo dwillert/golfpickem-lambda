@@ -30,7 +30,7 @@ class TestGolfDataHelper(TestCase):
         retval = self.golf_data_client.runner()
         self.assertEqual(retval, 200)
     
-    @patch("boto3.client", return_value=MockBotoS3())
+    @patch("boto3.session.Session", return_value=MockBotoS3())
     def test_load_s3(self, mock_s3):
         self.golf_data_client.s3_client = mock_s3
         retval = self.golf_data_client.load_to_s3()

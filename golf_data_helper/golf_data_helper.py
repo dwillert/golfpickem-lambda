@@ -5,6 +5,7 @@ from requests.exceptions import RequestException, HTTPError, ConnectionError
 import json
 import logging
 import ast
+import sys
 
 from os import environ
 
@@ -16,6 +17,8 @@ class GolfData:
         self.tournament_data = {}
         self.s3_client = boto3.client("s3")
         self.logger = logging.getLogger("Golf Data Logger")
+
+        logging.basicConfig()
     
     def retrieve_api_key(self):
         secret_name = "golfpickem/api_key"
@@ -31,8 +34,6 @@ class GolfData:
                 print("The request was invalid due to:", e)
             elif e.response['Error']['Code'] == 'InvalidParameterException':
                 print("The request had invalid params:", e)
-            elif e.response['Error']['Code'] == 'DecryptionFailure':
-                print("The requested secret can't be decrypted using the provided KMS key:", e)
             elif e.response['Error']['Code'] == 'InternalServiceError':
                 print("An error occurred on service side:", e)
         else:
@@ -42,31 +43,40 @@ class GolfData:
     
     def load_to_s3(self):
         try:
-            response = self.s3_client.upload_file(Filename="/tmp/golf_tournament_data.json", Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
-            print(response)
-            self.logger.info(response)
-            return response 
+            self.s3_client.upload_file(Filename="/tmp/golf_tournament_data.json", Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
+        except Exception as e:
+            self.logger.error(f"File Upload Error: {e}")
+            raise Exception from e
+        
+    def check_data(self):
+        cur_data = self.download_file()
+        try:
+            if cur_data["results"]["tournament"]["live_details"]["status"] in ["endofday", "completed"] and cur_data["results"]["tournament"]["id"] == self.tournament_id:
+                self.logger.info("Tournament is end of Day - No Data to Pull")
+                sys.exit(0)
+        except Exception as e:
+            self.logger.info(f"Error Checking Existing Data: {e}")
+
+    def download_file(self):
+        try:
+            response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
+            res_json = response.json()
         except Exception as e:
             print(e)
             self.logger.error(e)
             raise Exception from e
-        
-    # def download_file(self):
-    #     try:
-    #         response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
-    #     except Exception as e:
-    #         print(e)
-    #         self.logger.error(e)
-    #         raise Exception from e
-    #     return response
+        return res_json
 
     def create_json_file(self):
         with open("/tmp/golf_tournament_data.json", "w+") as f:
             json.dump(self.golf_data, f)
     
     def runner(self):
-        print("Starting Data Pull")
-        # self.logger.info("Starting Data Pull")
+        self.logger.info("Starting Process")
+        self.logger.info("Checking Existing Data")
+        self.check_data()
+        self.logger.info("Data Requires Update - Executing Data Pull")
+
         url = f"https://golf-leaderboard-data.p.rapidapi.com/leaderboard/{self.tournament_id}"
 
 
@@ -76,8 +86,7 @@ class GolfData:
         }
         try:
             response = requests.request("GET", url, headers=headers)
-            print(f"API RESPONSE: {response.status_code}")
-            # self.logger.info(f"API RESPONSE: {response.status_code}")
+            self.logger.info(f"API RESPONSE: {response.status_code}")
             self.golf_data = response.json()
         except HTTPError as httpe:
             print(f"HTTP ERROR: {httpe.args[0]} - Full Log: {httpe}")
@@ -88,10 +97,9 @@ class GolfData:
             raise Exception from reqe
         self.create_json_file()
         try:
-            s3_response = self.load_to_s3()
-            print(f"S3 Client RESPONSE: {s3_response}")
-            # self.logger.info(f"S3 Client RESPONSE: {s3_response}")
-            return s3_response
+            self.load_to_s3()
+            self.logger.info(f"S3 Upload Success")
+            return True
         except Exception as e:
             print(e)
             raise Exception from e 
@@ -99,7 +107,7 @@ class GolfData:
 def lambda_handler(event, context):
     data_client = GolfData()
     data_client.runner()
-    return "Complete"
+    sys.exit(0)
 
 # if __name__ == "__main__":
 #     data_client = GolfData()

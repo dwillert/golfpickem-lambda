@@ -13,7 +13,7 @@ This architecture was chosen to limit calls to RapidAPI and stay within the free
 ![Application Diagram](docs/app_arch_diagram.png)
 > *Application Architecture Diagram*
 
-![Flow Diagram](docs/golfpickem_lambda_flow.png)
+![Flow Diagram](docs/golfpickem_flow.png)
 > *Logical Flow Diagram*
 
 ## Deployment Pipeline
