@@ -6,6 +6,7 @@ import json
 import logging
 import ast
 import sys
+from datetime import datetime
 
 from os import environ
 
@@ -17,6 +18,7 @@ class GolfData:
         self.tournament_data = {}
         self.s3_client = boto3.client("s3")
         self.logger = logging.getLogger("Golf Data Logger")
+        self.timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
 
         logging.basicConfig()
     
@@ -43,13 +45,18 @@ class GolfData:
     
     def load_to_s3(self):
         try:
-            self.s3_client.upload_file(Filename="/tmp/golf_tournament_data.json", Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
+            existing_file = self.get_existing_filename()
+            self.logger.info(f"Deleting {existing_file} from S3")
+            self.s3_client.delete_object(Bucket="golfpickem-bucket", Key=existing_file)
+            self.logger.info(f"Uploading golf_tournament_data_{self.timestamp}.json to S3")
+            self.s3_client.upload_file(Filename=f"/tmp/golf_tournament_data_{self.timestamp}.json", Bucket="golfpickem-bucket", Key=f"golf_tournament_data{self.timestamp}.json")
         except Exception as e:
             self.logger.error(f"File Upload Error: {e}")
             raise Exception from e
         
     def check_data(self):
-        cur_data = self.download_file()
+        file_name = self.get_existing_filename()
+        cur_data = self.download_file(file_name)
         try:
             if cur_data["results"]["tournament"]["live_details"]["status"] in ["endofday", "completed"] and cur_data["results"]["tournament"]["id"] == self.tournament_id:
                 self.logger.info("Tournament is end of Day - No Data to Pull")
@@ -57,9 +64,9 @@ class GolfData:
         except Exception as e:
             self.logger.info(f"Error Checking Existing Data: {e}")
 
-    def download_file(self):
+    def download_file(self, file_name):
         try:
-            response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key="golf_tournament_data.json")
+            response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key=file_name)
             res_json = response.json()
         except Exception as e:
             print(e)
@@ -68,12 +75,17 @@ class GolfData:
         return res_json
 
     def create_json_file(self):
-        with open("/tmp/golf_tournament_data.json", "w+") as f:
+        with open(f"/tmp/golf_tournament_data_{self.timestamp}.json", "w+") as f:
             json.dump(self.golf_data, f)
+    
+    def get_existing_filename(self):
+        files = self.s3_client.list_objects_v2(Bucket="golfpickem-bucket", Prefix="golf_tournament_data")
+        return files["Contents"][0]["Key"]
     
     def runner(self):
         self.logger.info("Starting Process")
         self.logger.info("Checking Existing Data")
+        
         self.check_data()
         self.logger.info("Data Requires Update - Executing Data Pull")
 
