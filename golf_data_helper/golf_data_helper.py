@@ -68,13 +68,11 @@ class GolfData:
     def download_file(self, file_name):
         try:
             response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key=file_name)
-            print(response)
-            res_json = response.json()
+            return response
         except Exception as e:
             print(e)
             self.logger.error(e)
             raise Exception from e
-        return res_json
 
     def create_json_file(self):
         with open(f"/tmp/golf_tournament_data_{self.timestamp}.json", "w+") as f:
