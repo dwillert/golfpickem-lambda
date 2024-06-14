@@ -56,6 +56,7 @@ class GolfData:
         
     def check_data(self):
         file_name = self.get_existing_filename()
+        print(file_name)
         cur_data = self.download_file(file_name)
         try:
             if cur_data["results"]["tournament"]["live_details"]["status"] in ["endofday", "completed"] and cur_data["results"]["tournament"]["id"] == self.tournament_id:
@@ -67,6 +68,7 @@ class GolfData:
     def download_file(self, file_name):
         try:
             response = self.s3_client.get_object(Bucket="golfpickem-bucket", Key=file_name)
+            print(response)
             res_json = response.json()
         except Exception as e:
             print(e)
