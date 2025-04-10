@@ -119,7 +119,7 @@ class GolfData:
 def lambda_handler(event, context):
     data_client = GolfData()
     data_client.runner()
-    sys.exit(0)
+    print("Lambda Function Complete")
 
 # if __name__ == "__main__":
 #     data_client = GolfData()

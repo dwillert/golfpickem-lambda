@@ -15,27 +15,27 @@ def csv_to_json():
                 "golfers": [
                     {
                     "id": 1,
-                    "name": row["Golfer 1"]
+                    "name": row["Golfer 1"].strip()
                     },
                     {
                     "id": 2,
-                    "name": row["Golfer 2"]
+                    "name": row["Golfer 2"].strip()
                     },
                     {
                     "id": 3,
-                    "name": row["Golfer 3"]
+                    "name": row["Golfer 3"].strip()
                     },
                     {
                     "id": 4,
-                    "name": row["Golfer 4"]
+                    "name": row["Golfer 4"].strip()
                     },
                     {
                     "id": 5,
-                    "name": row["Golfer 5"]
+                    "name": row["Golfer 5"].strip()
                     },
                     {
                     "id": 6,
-                    "name": row["Golfer 6"]
+                    "name": row["Golfer 6"].strip()
                     }
                 ]
             }
