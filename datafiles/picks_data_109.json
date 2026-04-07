@@ -1,0 +1,959 @@
+[
+    {
+        "id": 1,
+        "name": "Sean Rosencrance",
+        "tiebreaker": "-10",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Russell Henley"
+            },
+            {
+                "id": 4,
+                "name": "Min Woo Lee"
+            },
+            {
+                "id": 5,
+                "name": "Maverick McNealy"
+            },
+            {
+                "id": 6,
+                "name": "Billy Horschel"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Nick Williamson",
+        "tiebreaker": "-10",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Jon Rahm"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 4,
+                "name": "Robert MacIntyre"
+            },
+            {
+                "id": 5,
+                "name": "Harris English"
+            },
+            {
+                "id": 6,
+                "name": "Matt Fitzpatrick"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Mike T",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Ludvig Åberg"
+            },
+            {
+                "id": 3,
+                "name": "Cameron Smith"
+            },
+            {
+                "id": 4,
+                "name": "Will Zalatoris"
+            },
+            {
+                "id": 5,
+                "name": "Max Homa"
+            },
+            {
+                "id": 6,
+                "name": "Cam Davis"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Zach Green",
+        "tiebreaker": "-12",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Bryson DeChambeau"
+            },
+            {
+                "id": 3,
+                "name": "Cameron Smith"
+            },
+            {
+                "id": 4,
+                "name": "Tom Kim"
+            },
+            {
+                "id": 5,
+                "name": "Matt Fitzpatrick"
+            },
+            {
+                "id": 6,
+                "name": "Max Homa"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Patrick M",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Xander Schauffele"
+            },
+            {
+                "id": 3,
+                "name": "Sungjae Im"
+            },
+            {
+                "id": 4,
+                "name": "Adam Scott"
+            },
+            {
+                "id": 5,
+                "name": "Michael Kim"
+            },
+            {
+                "id": 6,
+                "name": "Billy Horschel"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Dennis Ahn",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Bryson DeChambeau"
+            },
+            {
+                "id": 3,
+                "name": "Tom Kim"
+            },
+            {
+                "id": 4,
+                "name": "Keegan Bradley"
+            },
+            {
+                "id": 5,
+                "name": "Cameron Young"
+            },
+            {
+                "id": 6,
+                "name": "Matt Fitzpatrick"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Alex Desverreaux",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Jon Rahm"
+            },
+            {
+                "id": 3,
+                "name": "Cameron Smith"
+            },
+            {
+                "id": 4,
+                "name": "Tony Finau"
+            },
+            {
+                "id": 5,
+                "name": "Max Homa"
+            },
+            {
+                "id": 6,
+                "name": "Matt Fitzpatrick"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Sean Palmer",
+        "tiebreaker": "-13",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 3,
+                "name": "Patrick Cantlay"
+            },
+            {
+                "id": 4,
+                "name": "Russell Henley"
+            },
+            {
+                "id": 5,
+                "name": "Harris English"
+            },
+            {
+                "id": 6,
+                "name": "Tom Hoge"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Alex Bloom",
+        "tiebreaker": "-12",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 3,
+                "name": "Will Zalatoris"
+            },
+            {
+                "id": 4,
+                "name": "Akshay Bhatia"
+            },
+            {
+                "id": 5,
+                "name": "Cameron Young"
+            },
+            {
+                "id": 6,
+                "name": "Maverick McNealy"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Thomas Lowrey",
+        "tiebreaker": "-16",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Patrick Cantlay"
+            },
+            {
+                "id": 4,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 5,
+                "name": "Maverick McNealy"
+            },
+            {
+                "id": 6,
+                "name": "Brian Harman"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Beecher Carder",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Ludvig Åberg"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Akshay Bhatia"
+            },
+            {
+                "id": 4,
+                "name": "Sepp Straka"
+            },
+            {
+                "id": 5,
+                "name": "Matt Fitzpatrick"
+            },
+            {
+                "id": 6,
+                "name": "Max Homa"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Bennett White",
+        "tiebreaker": "-14",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Jon Rahm"
+            },
+            {
+                "id": 2,
+                "name": "Viktor Hovland"
+            },
+            {
+                "id": 3,
+                "name": "Min Woo Lee"
+            },
+            {
+                "id": 4,
+                "name": "Patrick Reed"
+            },
+            {
+                "id": 5,
+                "name": "Nicolai Højgaard"
+            },
+            {
+                "id": 6,
+                "name": "Max Homa"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Brendan Osean",
+        "tiebreaker": "-9",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Robert MacIntyre"
+            },
+            {
+                "id": 4,
+                "name": "Patrick Reed"
+            },
+            {
+                "id": 5,
+                "name": "Matt Fitzpatrick"
+            },
+            {
+                "id": 6,
+                "name": "Cameron Young"
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Michael Pourchot",
+        "tiebreaker": "-16",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Bryson DeChambeau"
+            },
+            {
+                "id": 3,
+                "name": "Patrick Cantlay"
+            },
+            {
+                "id": 4,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 5,
+                "name": "Tom Hoge"
+            },
+            {
+                "id": 6,
+                "name": "Thomas Detry"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Allen Ellis",
+        "tiebreaker": "-9",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 3,
+                "name": "Russell Henley"
+            },
+            {
+                "id": 4,
+                "name": "Min Woo Lee"
+            },
+            {
+                "id": 5,
+                "name": "Michael Kim"
+            },
+            {
+                "id": 6,
+                "name": "Billy Horschel"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Sam Carlin",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 2,
+                "name": "Ludvig Åberg"
+            },
+            {
+                "id": 3,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 4,
+                "name": "Patrick Cantlay"
+            },
+            {
+                "id": 5,
+                "name": "Maverick McNealy"
+            },
+            {
+                "id": 6,
+                "name": "Tom Hoge"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Matt Wohlers",
+        "tiebreaker": "-13",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Joaquin Niemann"
+            },
+            {
+                "id": 2,
+                "name": "Viktor Hovland"
+            },
+            {
+                "id": 3,
+                "name": "Min Woo Lee"
+            },
+            {
+                "id": 4,
+                "name": "Akshay Bhatia"
+            },
+            {
+                "id": 5,
+                "name": "Taylor Pendrith"
+            },
+            {
+                "id": 6,
+                "name": "Laurie Canter"
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Ricky Dalrymple",
+        "tiebreaker": "-10",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Ludvig Åberg"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Min Woo Lee"
+            },
+            {
+                "id": 4,
+                "name": "Robert MacIntyre"
+            },
+            {
+                "id": 5,
+                "name": "Nicolai Højgaard"
+            },
+            {
+                "id": 6,
+                "name": "Rasmus Højgaard"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Nick Fox",
+        "tiebreaker": "-12",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Patrick Cantlay"
+            },
+            {
+                "id": 4,
+                "name": "Sergio Garcia"
+            },
+            {
+                "id": 5,
+                "name": "Tom Hoge"
+            },
+            {
+                "id": 6,
+                "name": "Laurie Canter"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Erik Carribean",
+        "tiebreaker": "-10",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 2,
+                "name": "Jon Rahm"
+            },
+            {
+                "id": 3,
+                "name": "Corey Conners"
+            },
+            {
+                "id": 4,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 5,
+                "name": "Phil Mickelson"
+            },
+            {
+                "id": 6,
+                "name": "Tom Hoge"
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Mack Bayline",
+        "tiebreaker": "-10",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 4,
+                "name": "Min Woo Lee"
+            },
+            {
+                "id": 5,
+                "name": "Billy Horschel"
+            },
+            {
+                "id": 6,
+                "name": "Phil Mickelson"
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Noah White",
+        "tiebreaker": "-12",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 3,
+                "name": "Patrick Cantlay"
+            },
+            {
+                "id": 4,
+                "name": "Sergio Garcia"
+            },
+            {
+                "id": 5,
+                "name": "Maverick McNealy"
+            },
+            {
+                "id": 6,
+                "name": "Brian Harman"
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Jamie Papagno",
+        "tiebreaker": "-16",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Scottie Scheffler"
+            },
+            {
+                "id": 2,
+                "name": "Jon Rahm"
+            },
+            {
+                "id": 3,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 4,
+                "name": "Robert MacIntyre"
+            },
+            {
+                "id": 5,
+                "name": "Phil Mickelson"
+            },
+            {
+                "id": 6,
+                "name": "Laurie Canter"
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Jordan Bibb",
+        "tiebreaker": "-14",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Ludvig Åberg"
+            },
+            {
+                "id": 2,
+                "name": "Joaquin Niemann"
+            },
+            {
+                "id": 3,
+                "name": "Sepp Straka"
+            },
+            {
+                "id": 4,
+                "name": "Akshay Bhatia"
+            },
+            {
+                "id": 5,
+                "name": "Nick Taylor"
+            },
+            {
+                "id": 6,
+                "name": "Harris English"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Anthony Woods",
+        "tiebreaker": "-16",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Xander Schauffele"
+            },
+            {
+                "id": 2,
+                "name": "Viktor Hovland"
+            },
+            {
+                "id": 3,
+                "name": "Cameron Smith"
+            },
+            {
+                "id": 4,
+                "name": "Sahith Theegala"
+            },
+            {
+                "id": 5,
+                "name": "Billy Horschel"
+            },
+            {
+                "id": 6,
+                "name": "Brian Harman"
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "name": "Matt Seale",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Justin Thomas"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Will Zalatoris"
+            },
+            {
+                "id": 4,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 5,
+                "name": "Cam Davis"
+            },
+            {
+                "id": 6,
+                "name": "Thomas Detry"
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "name": "Dan Willert",
+        "tiebreaker": "-12",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Xander Schauffele"
+            },
+            {
+                "id": 2,
+                "name": "Joaquin Niemann"
+            },
+            {
+                "id": 3,
+                "name": "Cameron Smith"
+            },
+            {
+                "id": 4,
+                "name": "Sahith Theegala"
+            },
+            {
+                "id": 5,
+                "name": "Max Homa"
+            },
+            {
+                "id": 6,
+                "name": "Billy Horschel"
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "name": "Mitch Lamb",
+        "tiebreaker": "-11",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Rory McIlroy"
+            },
+            {
+                "id": 2,
+                "name": "Collin Morikawa"
+            },
+            {
+                "id": 3,
+                "name": "Cameron Smith"
+            },
+            {
+                "id": 4,
+                "name": "Shane Lowry"
+            },
+            {
+                "id": 5,
+                "name": "Max Homa"
+            },
+            {
+                "id": 6,
+                "name": "Billy Horschel"
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "name": "Will Cunningham",
+        "tiebreaker": "-12",
+        "score": 0,
+        "penalty": 0,
+        "golfers": [
+            {
+                "id": 1,
+                "name": "Xander Schauffele"
+            },
+            {
+                "id": 2,
+                "name": "Bryson DeChambeau"
+            },
+            {
+                "id": 3,
+                "name": "Will Zalatoris"
+            },
+            {
+                "id": 4,
+                "name": "Keegan Bradley"
+            },
+            {
+                "id": 5,
+                "name": "Matt Fitzpatrick"
+            },
+            {
+                "id": 6,
+                "name": "Stephan Jaeger"
+            }
+        ]
+    }
+]
