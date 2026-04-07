@@ -39,7 +39,7 @@ logger = logging.getLogger("Golf Data Logger")
 #         self.logger.error(e)
 #         raise Exception from e
 
-def create_json_file(self, data: dict) -> str:
+def create_json_file(data: dict) -> str:
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     tmp_file_path = f"/tmp/golf_tournament_data_{timestamp}.json"
     with open(tmp_file_path, "w+") as f:
