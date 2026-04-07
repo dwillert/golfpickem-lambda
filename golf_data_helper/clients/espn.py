@@ -6,7 +6,7 @@ class ESPNClient:
     SCOREBOARD_URL = "apis/site/v2/sports/golf/leaderboard"
     
     @staticmethod
-    def get_golf_data(tournament_id="401703521") -> dict:
+    def get_golf_data(tournament_id="401811940") -> dict:
         url = f"{ESPNClient.BASE_URL}{ESPNClient.SCOREBOARD_URL}"
         response = requests.get(url, params={"league": "pga", "event": tournament_id, "limit": "1000"})
         if not response.status_code == 200:
@@ -30,7 +30,7 @@ class ESPNClient:
                     "position": int(golfer["status"]["position"]["id"]),
                     "thru": golfer["status"].get("hole", "WD"),
                     "rounds": [
-                        {"round": i + 1, "strokes": int(golfer["linescores"][i]["value"]) if i+1 < len(golfer["linescores"]) else 0}
+                        {"round": i + 1, "strokes": int(golfer["linescores"][i]["value"]) if i < len(golfer["linescores"]) else 0}
                         for i in range(4)
                     ],
                     "status": golfer["status"]["displayValue"],

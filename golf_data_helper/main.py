@@ -53,7 +53,7 @@ def lambda_handler(event, context):
     # latest_data = s3.download_file(latest_file_name)
     #todo add live details to espn payload
 
-    tournament_id = os.getenv("tournament_id", "401703504")
+    tournament_id = os.getenv("tournament_id", "401811940")
     golf_data = ESPNClient.get_golf_data(tournament_id=tournament_id)
 
     logger.info("Data retrieved from ESPN API. Uploading to S3...")
