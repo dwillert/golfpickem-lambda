@@ -24,7 +24,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.9'
+        python-version: '3.10'
     
     #credentials to connect to AWS
     - name: Configure AWS credentials from Production account
@@ -35,7 +35,7 @@ jobs:
         aws-region: us-east-1
         profile_name: default
         project_name: golf-pickem-data-lambda
-        runtime: python3.9
+        runtime: python3.10
     #     s3_bucket: willert-bucket
     
     # Runs a set of commands using the runners shell; THIS DOESN'T WORK
@@ -51,7 +51,7 @@ jobs:
           #  aws lambda publish-layer-version --layer-name golf-pickem-data-layer \
           #  --description "Lambda Layer for Golf Pickem Lambda" \
           #  --zip-file fileb://golf-pickem-data-lambda.zip \
-          #  --compatible-runtimes python3.9 python3.10 \
+          #  --compatible-runtimes python3.10 \
           #  --compatible-architectures "arm64" "x86_64"
          
          #ensuring current working directory is accessible by the function--this might not be doing anything
@@ -71,6 +71,6 @@ jobs:
         timeout: 10
         handler: golf_data_helper.main.lambda_handler
         role: arn:aws:iam::518463288977:role/service-role/golf-pickem-data-lambda-role
-        runtime: python3.9
+        runtime: python3.10
         #contains all the files in my github repository
         zip_file: golf-pickem-data-lambda.zip
