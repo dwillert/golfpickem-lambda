@@ -57,7 +57,8 @@ def lambda_handler(event, context):
     golf_data = ESPNClient.get_golf_data(tournament_id=tournament_id)
 
     logger.info("Data retrieved from ESPN API. Uploading to S3...")
-    s3.delete_object(key=latest_file_name)
+    if latest_file_name:
+        s3.delete_object(key=latest_file_name)
     tmp_file_path = create_json_file(golf_data)
     s3.upload_file(filename=tmp_file_path, key=f"golf_tournament_data{datetime.now().strftime('%Y%m%d%H%M%S')}.json")
 
