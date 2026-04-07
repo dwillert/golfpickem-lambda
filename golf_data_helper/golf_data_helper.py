@@ -1,47 +1,46 @@
 import boto3
-from botocore.exceptions import ClientError
-import requests
-from requests.exceptions import RequestException, HTTPError, ConnectionError
+import os
 import json
 import logging
-import ast
 import sys
 from datetime import datetime
+
+from golf_data_helper.clients.espn import ESPNClient
 
 from os import environ
 
 class GolfData:
     def __init__(self):
-        self.api_key = self.retrieve_api_key()
-        self.tournament_id = str(environ["tournament_id"])
-        self.leaderboard_data = {}
-        self.tournament_data = {}
+        # self.api_key = self.retrieve_api_key()
+        # self.tournament_id = str(environ["tournament_id"])
+        self.tournament_id = str(os.getenv("tournament_id"))
         self.s3_client = boto3.client("s3")
         self.logger = logging.getLogger("Golf Data Logger")
         self.timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        self.espn_client = ESPNClient()
 
         logging.basicConfig()
     
-    def retrieve_api_key(self):
-        secret_name = "golfpickem/api_key"
-        secrets_client = boto3.client("secretsmanager", region_name="us-east-1")
-        try:
-            secret_res = secrets_client.get_secret_value(
-                SecretId=secret_name,
-            )
-        except ClientError as e:
-            if e.response['Error']['Code'] == 'ResourceNotFoundException':
-                print("The requested secret " + secret_name + " was not found")
-            elif e.response['Error']['Code'] == 'InvalidRequestException':
-                print("The request was invalid due to:", e)
-            elif e.response['Error']['Code'] == 'InvalidParameterException':
-                print("The request had invalid params:", e)
-            elif e.response['Error']['Code'] == 'InternalServiceError':
-                print("An error occurred on service side:", e)
-        else:
-            secret_dict = ast.literal_eval(secret_res['SecretString'])
-            secret = secret_dict['API_KEY']
-            return secret
+    # def retrieve_api_key(self):
+    #     secret_name = "golfpickem/api_key"
+    #     secrets_client = boto3.client("secretsmanager", region_name="us-east-1")
+    #     try:
+    #         secret_res = secrets_client.get_secret_value(
+    #             SecretId=secret_name,
+    #         )
+    #     except ClientError as e:
+    #         if e.response['Error']['Code'] == 'ResourceNotFoundException':
+    #             print("The requested secret " + secret_name + " was not found")
+    #         elif e.response['Error']['Code'] == 'InvalidRequestException':
+    #             print("The request was invalid due to:", e)
+    #         elif e.response['Error']['Code'] == 'InvalidParameterException':
+    #             print("The request had invalid params:", e)
+    #         elif e.response['Error']['Code'] == 'InternalServiceError':
+    #             print("An error occurred on service side:", e)
+    #     else:
+    #         secret_dict = ast.literal_eval(secret_res['SecretString'])
+    #         secret = secret_dict['API_KEY']
+    #         return secret
     
     def load_to_s3(self):
         try:
@@ -56,7 +55,6 @@ class GolfData:
         
     def check_data(self):
         file_name = self.get_existing_filename()
-        print(file_name)
         cur_data = self.download_file(file_name)
         try:
             if cur_data["results"]["tournament"]["live_details"]["status"] in ["endofday", "completed"] and cur_data["results"]["tournament"]["id"] == self.tournament_id:
@@ -82,6 +80,35 @@ class GolfData:
         files = self.s3_client.list_objects_v2(Bucket="golfpickem-bucket", Prefix="golf_tournament_data")
         return files["Contents"][0]["Key"]
     
+    # @staticmethod
+    # def parse_golf_data(golf_data):
+    #     golf_dict = {
+    #         "tournament":
+    #         {
+    #         "name": golf_data["name"],
+    #         "course": golf_data["courses"][0]["name"],
+    #         "location": f'{golf_data["courses"][0]["address"]["city"]}, {golf_data["courses"][0]["address"]["country"]}',
+    #         "cut_score": golf_data["tournament"]["cutScore"],
+    #         },
+    #         "leaderboard": [
+    #             {
+    #             "id": golfer["sortOrder"],
+    #             "name": golfer["athlete"]["displayName"],
+    #             "country": golfer["athlete"]["flag"]["alt"],
+    #             "score": int(golfer["statistics"][0]["value"]),
+    #             "position": golfer["status"]["position"]["id"],
+    #             "thru": golfer["status"].get("hole", "WD"),
+    #             "rounds": [
+    #                 {"round": i + 1, "value": golfer["linescores"][i]["value"] if i < len(golfer["linescores"]) else None}
+    #                 for i in range(4)
+    #             ],
+    #             "status": golfer["status"]["displayValue"],
+    #             } for golfer in golf_data["competitions"][0]["competitors"]
+    #         ]
+    #     }
+    #     golf_dict["leaderboard"] = sorted(golf_dict["leaderboard"], key=lambda x: x["id"])
+    #     return golf_dict
+
     def runner(self):
         self.logger.info("Starting Process")
         self.logger.info("Checking Existing Data")
@@ -89,24 +116,27 @@ class GolfData:
         self.check_data()
         self.logger.info("Data Requires Update - Executing Data Pull")
 
-        url = f"https://golf-leaderboard-data.p.rapidapi.com/leaderboard/{self.tournament_id}"
+        # url = f"https://golf-leaderboard-data.p.rapidapi.com/leaderboard/{self.tournament_id}"
 
 
-        headers = {
-            "X-RapidAPI-Key": self.api_key,
-            "X-RapidAPI-Host": "golf-leaderboard-data.p.rapidapi.com"
-        }
-        try:
-            response = requests.request("GET", url, headers=headers)
-            self.logger.info(f"API RESPONSE: {response.status_code}")
-            self.golf_data = response.json()
-        except HTTPError as httpe:
-            print(f"HTTP ERROR: {httpe.args[0]} - Full Log: {httpe}")
-        except ConnectionError as conne:
-            print(f"Connection Error: {conne}")
-        except RequestException as reqe:
-            print(f"Request Exception: {reqe}")
-            raise Exception from reqe
+        # headers = {
+        #     "X-RapidAPI-Key": self.api_key,
+        #     "X-RapidAPI-Host": "golf-leaderboard-data.p.rapidapi.com"
+        # }
+        # try:
+        #     response = requests.request("GET", url, headers=headers)
+        #     self.logger.info(f"API RESPONSE: {response.status_code}")
+        #     self.golf_data = response.json()
+        self.golf_data = self.espn_client.get_golf_data(tournament_id=self.tournament_id)
+        # self.golf_data = self.parse_golf_data(golf_data)
+
+        # except HTTPError as httpe:
+        #     print(f"HTTP ERROR: {httpe.args[0]} - Full Log: {httpe}")
+        # except ConnectionError as conne:
+        #     print(f"Connection Error: {conne}")
+        # except RequestException as reqe:
+        #     print(f"Request Exception: {reqe}")
+        #     raise Exception from reqe
         self.create_json_file()
         try:
             self.load_to_s3()
