@@ -2,21 +2,21 @@
 import requests
 import json
 
-from datetime import datetime
-from zoneinfo import ZoneInfo
-
 class ESPNClient:
     BASE_URL = "https://site.api.espn.com/"
     SCOREBOARD_URL = "apis/site/v2/sports/golf/leaderboard"
 
     @staticmethod
     def _get_status(status: dict) -> str:
-        if "hole" in status:
-            return status["hole"]
-        elif status["type"]["name"] == "STATUS_SCHEDULED":
+        if status["type"]["name"] == "STATUS_SCHEDULED":
             return status["detail"][:-3]
-        elif status["playoff"]:
-            return "Playoff"
+        elif status["type"]["name"] == "STATUS_IN_PROGRESS":
+            if "hole" in status:
+                if status["hole"] == 18:
+                    return "F"
+                return status["hole"]
+        # elif status.get("playoff") is not None:
+        #     return "Playoff"
         else:
             return "WD"
 
@@ -39,13 +39,23 @@ class ESPNClient:
             raise Exception(f"Error fetching data: {response.status_code} - {response.text}")
 
         golf_data = response.json()["events"][0]
+        # print(golf_data["name"])
+        # print(golf_data["defendingChampion"])
         golf_dict = {
             "tournament": {
                 "name": golf_data["name"],
                 "course": golf_data["courses"][0]["name"],
                 "location": f'{golf_data["courses"][0]["address"]["city"]}, {golf_data["courses"][0]["address"]["country"]}',
                 "cut_score": golf_data["tournament"]["cutScore"],
-                "status": golf_data["status"]["type"]["name"]
+                "status": golf_data["status"]["type"]["name"],
+                # "total_yards": golf_data["courses"][0]["totalYards"],
+                # "shots_to_par": golf_data["courses"][0]["shotsToPar"],
+                # "defending_champion": golf_data["defendingChampion"]["athlete"]["displayName"] if golf_data["defendingChampion"] else "N/A",
+                # "weather": {
+                #     "temperature": golf_data["courses"][0]["weather"]["temperature"],
+                #     "description": golf_data["courses"][0]["weather"]["displayValue"],
+                #     "wind_speed": golf_data["courses"][0]["weather"]["windSpeed"]
+                # }
             },
             "leaderboard": [
                 {
@@ -64,7 +74,6 @@ class ESPNClient:
             ]
         }
         golf_dict["leaderboard"] = sorted(golf_dict["leaderboard"], key=lambda x: x["id"])
-        print(golf_data["competitions"][0]["competitors"][-1])
         return golf_dict
 
 
