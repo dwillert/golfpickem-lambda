@@ -8,8 +8,11 @@ class ESPNClient:
 
     @staticmethod
     def _get_status(status: dict) -> str:
+        # print(status)
         if status["type"]["name"] == "STATUS_SCHEDULED":
             return status["detail"][:-3]
+        elif status["type"]["name"] == "STATUS_FINISH":
+            return "F"
         elif status["type"]["name"] == "STATUS_IN_PROGRESS":
             if "hole" in status:
                 if status["hole"] == 18:
