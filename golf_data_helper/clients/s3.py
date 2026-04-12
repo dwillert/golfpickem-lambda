@@ -3,6 +3,7 @@
 import json
 import boto3
 from botocore.exceptions import ClientError
+import logging
 
 class S3Client:
     def __init__(self, bucket_name="golfpickem-bucket", region_name=None):
@@ -10,14 +11,16 @@ class S3Client:
         self.s3 = session.resource("s3", region_name=region_name) if region_name else session.resource("s3")
         self.bucket_name = bucket_name
         self.bucket = self.s3.Bucket(bucket_name)
+        self.logger = logging.getLogger("Golf Data Logger")
 
     def list_objects(self, prefix=""):
         return [obj.key for obj in self.bucket.objects.filter(Prefix=prefix)]
 
-    def get_existing_filename(self, prefix="golf_tournament_data"):
+    def get_existing_filename(self, prefix="golf_tournament_data") -> str | None:
         keys = self.list_objects(prefix=prefix)
         if not keys:
-            raise FileNotFoundError(f"No objects found in bucket {self.bucket_name} with prefix '{prefix}'")
+            self.logger.info(f"No objects found in bucket {self.bucket_name} with prefix '{prefix}'")
+            return
         return keys[0]
 
     def delete_object(self, key):
